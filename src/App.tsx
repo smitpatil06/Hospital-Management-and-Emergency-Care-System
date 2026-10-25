@@ -10,10 +10,11 @@ import { MetricsCards } from './components/MetricsCards';
 import { ResultsTable } from './components/ResultsTable';
 import { AlgorithmComparison } from './components/AlgorithmComparison';
 import { TabBar, ProducerConsumer, BankersAlgorithm, MemoryManager } from './components/HospitalModules';
+import { CommandCenter } from './components/CommandCenter';
 
 export default function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmType>('priority_preemptive');
-  const [view, setView] = useState<'cpu' | 'sync' | 'bank' | 'mem'>('cpu');
+  const [view, setView] = useState<'hq' | 'cpu' | 'sync' | 'bank' | 'mem'>('hq');
   const [processes, setProcesses] = useState<Process[]>(PRESET_SCENARIOS[0].processes);
   const [roundRobinQuantum, setRoundRobinQuantum] = useState<number>(2);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -96,7 +97,8 @@ export default function App() {
   return (
     <>
       <TabBar view={view} setView={setView} />
-      {view === 'sync' ? <ProducerConsumer />
+      {view === 'hq' ? <CommandCenter />
+        : view === 'sync' ? <ProducerConsumer />
         : view === 'bank' ? <BankersAlgorithm processes={processes} />
         : view === 'mem' ? <MemoryManager processes={processes} />
         : isCompareRoute ? (

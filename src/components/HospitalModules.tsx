@@ -2,14 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Process } from '../types';
 import { FitPolicy, allocate, needOf, request, safety } from '../utils/hospital';
 
-type View = 'cpu' | 'sync' | 'bank' | 'mem';
+type View = 'hq' | 'cpu' | 'sync' | 'bank' | 'mem';
 const card: React.CSSProperties = { maxWidth: 960, margin: '70px auto 40px', padding: '0 20px' };
 const mono: React.CSSProperties = { fontFamily: 'var(--font-mono, monospace)', fontSize: 13, width: '100%' };
 
 export const TabBar: React.FC<{ view: View; setView: (v: View) => void }> = ({ view, setView }) => (
   <div style={{ position: 'fixed', top: 8, left: '50%', transform: 'translateX(-50%)', zIndex: 60, display: 'flex', gap: 4,
     background: 'var(--bg-color, #fff)', border: '1px solid #ccc', borderRadius: 8, padding: 4 }}>
-    {([['cpu', 'CPU Scheduling'], ['sync', 'Producer–Consumer'], ['bank', "Banker's"], ['mem', 'Memory']] as [View, string][]).map(([v, l]) => (
+    {([['hq', 'Hospital Control Center'], ['cpu', 'CPU Scheduling'], ['sync', 'Producer–Consumer'], ['bank', "Banker's"], ['mem', 'Memory']] as [View, string][]).map(([v, l]) => (
       <button key={v} className="clean-button" onClick={() => setView(v)}
         style={{ fontWeight: view === v ? 700 : 400, textDecoration: view === v ? 'underline' : 'none' }}>{l}</button>
     ))}
